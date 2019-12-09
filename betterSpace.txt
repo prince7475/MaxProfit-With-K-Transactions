@@ -1,0 +1,92 @@
+function maxProfit(prices, k){
+if(prices.length === 0 ) return 0
+  let evenProfits = prices.map((el) => 0)
+  let oddProfits = prices.map((el) => 0)
+  
+  for(let i = 1; i <= k; i++){
+    let currentArr
+    let prevArr
+    if(i % 2 === 1){
+      currentArr = oddProfits
+      prevArr = evenProfits
+    }else {
+      currentArr = evenProfits
+      prevArr = oddProfits
+    }
+    let maxAmount = -Infinity
+    for(let j = 1; j < prices.length; j++){
+      maxAmount = Math.max(maxAmount, prevArr[j - 1] - prices[j - 1])
+      currentArr[j] = Math.max(currentArr[j - 1], maxAmount + prices[j])
+    }
+  }
+  
+  return k % 2 === 0 ? evenProfits[prices.length - 1] : oddProfits[prices.length - 1]
+}
+
+
+
+
+
+
+
+Time -> O(nk) Space ->(n)
+function maxProfit(prices,k){
+  if(prices.length === 0) return 0
+    let evenProfits = prices.map((el) => 0)
+    let oddProfits = prices.map((el) => 0)
+    for(let i = 1; i <= k; i++){
+      let currentArr
+      let prevArr
+      let maxSoFar = -Infinity
+      if(i % 2 === 1){
+        currentArr = oddProfits
+        prevArr = evenProfits
+      }else {
+        currentArr = evenProfits
+        prevArr = oddProfits
+      }
+      
+      for(let d = 1; d < prices.length; d++){
+        maxSoFar = Math.max(maxSoFar, prevArr[d - 1] - prices[d - 1])
+        currentArr[d] = Math.max(currentArr[d - 1], maxSoFar + prices[d])
+      }
+    }
+    
+    return k % 2 === 0 ? evenProfits[prices.length - 1] : oddProfits[prices.length - 1]
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
